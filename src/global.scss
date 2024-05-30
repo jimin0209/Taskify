@@ -33,7 +33,19 @@ $pink: #e876ea;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459W1hx7Fgdg.woff2')
+      format('woff2'),
+    url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhxw.woff')
+      format('woff');
+  font-display: swap;
+}
+
 $font-family: 'Pretendard', sans-serif;
+$montserrat: 'montserrat', sans-serif;
 
 body {
   font-family: $font-family;
