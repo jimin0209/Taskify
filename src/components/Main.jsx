@@ -8,6 +8,9 @@ import img3 from '../assets/main_img3.svg';
 import img4 from '../assets/main_img4.svg';
 import img5 from '../assets/main_img5.svg';
 import img6 from '../assets/main_img6.svg';
+import icon1 from '../assets/main_icon1.svg';
+import icon2 from '../assets/main_icon2.svg';
+import icon3 from '../assets/main_icon3.svg';
 
 function Main() {
   return (
@@ -67,37 +70,59 @@ function Main() {
         </div>
       </section>
       <section className={styles.sec4}>
-        <p>생산성을 높이는 다양한 설정 ⚡</p>
-        <div>
-          <div>
-            <img src={img4} alt='메인페이지' className={styles.img4} />
+        <p className={styles.fourthTitle}>생산성을 높이는 다양한 설정 ⚡</p>
+        <div className={styles.sec4Con}>
+          <div className={styles.sec4Sub1}>
+            <div className={styles.imgBox1}>
+              <img src={img4} alt='메인페이지' className={styles.img4} />
+            </div>
+            <div className={styles.imgCon1}>
+              <p className={styles.imgConTitle}>대시보드 설정</p>
+              <p className={styles.imgConSub}>
+                대시보드 사진과 이름을 변경할 수 있어요.
+              </p>
+            </div>
           </div>
-          <div>
-            <p>대시보드 설정</p>
-            <p>대시보드 사진과 이름을 변경할 수 있어요.</p>
-          </div>
-        </div>
 
-        <div>
-          <div>
-            <img src={img5} alt='메인페이지' className={styles.img5} />
+          <div className={styles.sec4Sub2}>
+            <div className={styles.imgBox2}>
+              <img src={img5} alt='메인페이지' className={styles.img5} />
+            </div>
+            <div className={styles.imgCon2}>
+              <p className={styles.imgConTitle}>초대</p>
+              <p className={styles.imgConSub}>
+                새로운 팀원을 초대할 수 있어요.
+              </p>
+            </div>
           </div>
-          <div>
-            <p>초대</p>
-            <p>새로운 팀원을 초대할 수 있어요.</p>
-          </div>
-        </div>
 
-        <div>
-          <div>
-            <img src={img6} alt='메인페이지' className={styles.img6} />
-          </div>
-          <div>
-            <p>구성원</p>
-            <p>구성원을 초대하고 내보낼 수 있어요.</p>
+          <div className={styles.sec4Sub3}>
+            <div className={styles.imgBox3}>
+              <img src={img6} alt='메인페이지' className={styles.img6} />
+            </div>
+            <div className={styles.imgCon3}>
+              <p className={styles.imgConTitle}>구성원</p>
+              <p className={styles.imgConSub}>
+                구성원을 초대하고 내보낼 수 있어요.
+              </p>
+            </div>
           </div>
         </div>
       </section>
+      <footer className={styles.footer}>
+        <div className={styles.footerBox}>
+          <span className={styles.footerCodeit}>©codeit - 2023</span>
+          <div className={styles.footerLinks}>
+            <span className={styles.footerLink}>Privacy Policy</span>
+            <span className={styles.footerLink}>FAQ</span>
+          </div>
+          <div className={styles.footerSns}>
+            <img src={icon1} alt='로고' />
+            <img src={icon2} alt='로고' />
+            <img src={icon3} alt='로고' />
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
