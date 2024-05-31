@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import logo2 from '../assets/logo2.svg';
 import styles from './Log.module.scss';
 import eyeoff from '../assets/eyeoff.svg';
-import eyeon from '../assets/eyeon.svg'; // 추가
+import eyeon from '../assets/eyeon.svg';
 
 function Log() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // 추가
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
