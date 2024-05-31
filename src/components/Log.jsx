@@ -1,10 +1,48 @@
-import React from 'react';
+// Log.js
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo2 from '../assets/logo2.svg';
 import styles from './Log.module.scss';
 import eyeoff from '../assets/eyeoff.svg';
+import eyeon from '../assets/eyeon.svg'; // 추가
 
 function Log() {
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // 추가
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleEmailBlur = () => {
+    // 이메일 형식을 검증하는 정규표현식
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(email)) {
+      setEmailError('이메일 형식으로 작성해 주세요.');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordBlur = () => {
+    if (password.length < 8) {
+      setPasswordError('8자 이상 작성해 주세요.');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className={styles.login}>
       <div>
@@ -20,23 +58,46 @@ function Log() {
               <label className={styles.loginEmail}>이메일</label>
               <input
                 id='email'
-                className={styles.emailInput}
+                className={`${styles.emailInput} ${emailError && styles.error}`}
                 placeholder='이메일을 입력해주세요'
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={handleEmailBlur}
               />
-              <div className={styles.errorEmail}></div>
+              {emailError && (
+                <div className={styles.errorEmail}>{emailError}</div>
+              )}
             </div>
-            <div className={styles.loginputBox}>
+            <div
+              className={`${styles.loginputBox} ${styles.passwordInputContainer}`}
+            >
               <label className={styles.loginPassword}>비밀번호</label>
+
               <input
-                className={styles.passwordInput}
-                type='password'
+                className={`${styles.passwordInput} ${
+                  passwordError && styles.error
+                }`}
+                type={showPassword ? 'text' : 'password'}
                 placeholder='비밀번호를 입력해주세요'
+                value={password}
+                onChange={handlePasswordChange}
+                onBlur={handlePasswordBlur}
               />
-              <button className={styles.eyeoffBtn}>
-                <img src={eyeoff} alt='eye' className={styles.eyeoff} />
+              <button
+                className={styles.eyeoffBtn}
+                type='button'
+                onClick={togglePasswordVisibility}
+              >
+                <img
+                  src={showPassword ? eyeon : eyeoff}
+                  alt={showPassword ? 'eye-on' : 'eye-off'}
+                  className={styles.eyeIcon}
+                />
               </button>
-              <div className={styles.errorPassword}></div>
             </div>
+            {passwordError && (
+              <div className={styles.errorPassword}>{passwordError}</div>
+            )}
           </div>
           <button className={styles.buttonLogin} type='submit'>
             로그인
