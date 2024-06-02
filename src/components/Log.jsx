@@ -59,7 +59,7 @@ function Log() {
               <input
                 id='email'
                 className={`${styles.emailInput} ${emailError && styles.error}`}
-                placeholder='이메일을 입력해주세요'
+                placeholder='이메일을 입력해 주세요'
                 value={email}
                 onChange={handleEmailChange}
                 onBlur={handleEmailBlur}
@@ -78,7 +78,7 @@ function Log() {
                   passwordError && styles.error
                 }`}
                 type={showPassword ? 'text' : 'password'}
-                placeholder='비밀번호를 입력해주세요'
+                placeholder='비밀번호를 입력해 주세요'
                 value={password}
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordBlur}
