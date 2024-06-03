@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo2 from '../assets/logo2.svg';
 import styles from './Sign.module.scss';
 import eyeoff from '../assets/eyeoff.svg';
 import eyeon from '../assets/eyeon.svg';
 
 function Sign() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [nickname, setNickname] = useState('');
@@ -112,19 +113,27 @@ function Sign() {
     setTermsAccepted(e.target.checked);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      alert('가입이 완료되었습니다!');
+      navigate('/login');
+    }
+  };
+
   return (
-    <div className={styles.login}>
+    <div className={styles.signup}>
       <div>
         <Link to='/'>
-          <img src={logo2} alt='로고' className={styles.loginLogo} />
+          <img src={logo2} alt='로고' className={styles.signupLogo} />
         </Link>
-        <p className={styles.loginTitle}>오늘도 만나서 반가워요!</p>
+        <p className={styles.signupTitle}>첫 방문을 환영합니다!</p>
       </div>
-      <div className={styles.loginBox}>
-        <form className={styles.loginForm}>
-          <div className={styles.loginputs}>
-            <div className={styles.loginputBox}>
-              <label className={styles.loginEmail}>이메일</label>
+      <div className={styles.signupBox}>
+        <form className={styles.signupForm} onSubmit={handleSubmit}>
+          <div className={styles.signupputs}>
+            <div className={styles.signupputBox}>
+              <label className={styles.signupEmail}>이메일</label>
               <input
                 id='email'
                 className={`${styles.emailInput} ${emailError && styles.error}`}
@@ -137,8 +146,8 @@ function Sign() {
                 <div className={styles.errorEmail}>{emailError}</div>
               )}
             </div>
-            <div className={styles.loginputBox}>
-              <label className={styles.loginNickname}>닉네임</label>
+            <div className={styles.signupputBox}>
+              <label className={styles.signupNickname}>닉네임</label>
               <input
                 id='nickname'
                 className={`${styles.nicknameInput} ${
@@ -154,9 +163,9 @@ function Sign() {
               )}
             </div>
             <div
-              className={`${styles.loginputBox} ${styles.passwordInputContainer}`}
+              className={`${styles.signupputBox} ${styles.passwordInputContainer}`}
             >
-              <label className={styles.loginPassword}>비밀번호</label>
+              <label className={styles.signupPassword}>비밀번호</label>
               <input
                 className={`${styles.passwordInput} ${
                   passwordError && styles.error
@@ -183,15 +192,15 @@ function Sign() {
               <div className={styles.errorPassword}>{passwordError}</div>
             )}
             <div
-              className={`${styles.loginputBox} ${styles.passwordInputContainer}`}
+              className={`${styles.signupputBox} ${styles.passwordInputContainer}`}
             >
-              <label className={styles.loginPassword}>비밀번호 확인</label>
+              <label className={styles.signupPassword}>비밀번호 확인</label>
               <input
                 className={`${styles.passwordInput} ${
                   confirmPasswordError && styles.error
                 }`}
                 type={showConfirmPassword ? 'text' : 'password'}
-                placeholder='비밀번호를 다시 입력해 주세요'
+                placeholder='비밀번호를 한번 더 입력해 주세요'
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
                 onBlur={handleConfirmPasswordBlur}
@@ -224,17 +233,19 @@ function Sign() {
             </div>
           </div>
           <button
-            className={styles.buttonSignup}
+            className={`${styles.buttonSignup} ${
+              isFormValid ? styles.enabled : ''
+            }`}
             type='submit'
             disabled={!isFormValid}
           >
             가입하기
           </button>
         </form>
-        <div className={styles.loginQ}>
-          <p className={styles.loginQuestion}>
+        <div className={styles.signupQ}>
+          <p className={styles.signupQuestion}>
             이미 가입하셨나요?
-            <Link to='/login' className={styles.signup}>
+            <Link to='/login' className={styles.signin}>
               로그인하기
             </Link>
           </p>
