@@ -1,24 +1,25 @@
-// Log.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo2 from '../assets/logo2.svg';
 import styles from './Log.module.scss';
 import eyeoff from '../assets/eyeoff.svg';
 import eyeon from '../assets/eyeon.svg';
+import Modal from './Modal';
 
 function Log() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
   const handleEmailBlur = () => {
-    // 이메일 형식을 검증하는 정규표현식
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regex.test(email)) {
       setEmailError('이메일 형식으로 작성해 주세요.');
@@ -43,6 +44,20 @@ function Log() {
     setShowPassword(!showPassword);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // test 추후 API 연동
+    if (password === 'password123') {
+      navigate('/mydashboard');
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className={styles.login}>
       <div>
@@ -52,7 +67,7 @@ function Log() {
         <p className={styles.loginTitle}>오늘도 만나서 반가워요!</p>
       </div>
       <div className={styles.loginBox}>
-        <form className={styles.loginForm}>
+        <form className={styles.loginForm} onSubmit={handleLogin}>
           <div className={styles.loginputs}>
             <div className={styles.loginputBox}>
               <label className={styles.loginEmail}>이메일</label>
@@ -94,10 +109,10 @@ function Log() {
                   className={styles.eyeIcon}
                 />
               </button>
+              {passwordError && (
+                <div className={styles.errorPassword}>{passwordError}</div>
+              )}
             </div>
-            {passwordError && (
-              <div className={styles.errorPassword}>{passwordError}</div>
-            )}
           </div>
           <button className={styles.buttonLogin} type='submit'>
             로그인
@@ -112,6 +127,9 @@ function Log() {
           </p>
         </div>
       </div>
+      {showModal && (
+        <Modal message='비밀번호가 일치하지 않습니다.' onClose={closeModal} />
+      )}
     </div>
   );
 }
