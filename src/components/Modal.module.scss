@@ -1,0 +1,52 @@
+@import '../global.scss';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black1, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal {
+  background-color: $white;
+  padding: 20px;
+  width: 540px;
+  height: 250px;
+  overflow: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.modalContent {
+  text-align: center;
+  font-size: 18px;
+}
+
+.modalActions {
+  margin-top: 20px;
+  text-align: right;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.modalActions button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: $violet1;
+  color: $white;
+  border-radius: 8px;
+  font-size: 16px;
+}

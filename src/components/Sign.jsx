@@ -4,6 +4,7 @@ import logo2 from '../assets/logo2.svg';
 import styles from './Sign.module.scss';
 import eyeoff from '../assets/eyeoff.svg';
 import eyeon from '../assets/eyeon.svg';
+import Modal from './Modal';
 
 function Sign() {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ function Sign() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
     const checkFormValidity = () => {
@@ -115,10 +118,19 @@ function Sign() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isFormValid) {
-      alert('가입이 완료되었습니다!');
-      navigate('/login');
+    // test 추후 API 연동
+    if (email === 'test@aa.com') {
+      setModalMessage('이미 사용 중인 이메일입니다.');
+      setShowModal(true);
+    } else if (isFormValid) {
+      setModalMessage('가입이 완료되었습니다!');
+      setShowModal(true);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    navigate('/login');
   };
 
   return (
@@ -251,6 +263,7 @@ function Sign() {
           </p>
         </div>
       </div>
+      {showModal && <Modal message={modalMessage} onClose={closeModal} />}
     </div>
   );
 }
